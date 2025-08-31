@@ -2806,6 +2806,7 @@ BBPlumbing Team
                   <TabsList>
                     <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
                     <TabsTrigger value="how-it-works">How It Works</TabsTrigger>
+                    <TabsTrigger value="mobile-conversion">Mobile App Conversion</TabsTrigger>
                   </TabsList>
                   <TabsContent value="dashboard" className="mt-6">
                     <div className="space-y-6">
