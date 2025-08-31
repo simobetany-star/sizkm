@@ -1036,6 +1036,94 @@ export default function Landing() {
         </div>
       </footer>
 
+      {/* Product Detail Modal */}
+      {showProductDetail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowProductDetail(null)} />
+          <div className="relative bg-white rounded-2xl border border-gray-200 w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">{showProductDetail.name}</h2>
+                <button
+                  onClick={() => setShowProductDetail(null)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <img
+                    src={showProductDetail.image}
+                    alt={showProductDetail.name}
+                    className="w-full h-64 object-cover rounded-lg mb-4"
+                  />
+                  <div className="space-y-4">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h3 className="font-semibold text-blue-900 mb-2">3D Product Configurator</h3>
+                      <p className="text-blue-700 text-sm mb-3">Customize this product in real-time using our advanced 3D visualization tool.</p>
+                      <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Launch 3D Configurator
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="mb-6">
+                    <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">
+                      {showProductDetail.category}
+                    </span>
+                    <p className="text-gray-600 mb-6 leading-relaxed">{showProductDetail.description}</p>
+
+                    <div className="mb-6">
+                      <div className="text-3xl font-bold text-blue-600 mb-2">
+                        R{showProductDetail.price.toFixed(2)}
+                      </div>
+                      {showProductDetail.inStock ? (
+                        <span className="text-green-600 font-medium">✓ In Stock</span>
+                      ) : (
+                        <span className="text-red-600 font-medium">✗ Out of Stock</span>
+                      )}
+                    </div>
+
+                    <div className="space-y-3">
+                      <button
+                        onClick={() => {
+                          addToCart(showProductDetail);
+                          setShowProductDetail(null);
+                        }}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                      >
+                        Add to Cart
+                      </button>
+                      <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Save to Wishlist
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-200 pt-6">
+                    <h4 className="font-semibold text-gray-900 mb-3">Product Features</h4>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>• Professional-grade quality</li>
+                      <li>• South African compliant</li>
+                      <li>• 2-year manufacturer warranty</li>
+                      <li>• Fast delivery available</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Shopping Cart Modal */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
