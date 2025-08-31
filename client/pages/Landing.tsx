@@ -256,80 +256,69 @@ function ScrollResponsive3DModel({ section }: { section: number }) {
 
   return (
     <group ref={meshRef} position={[0, 0, 0]}>
-      {/* Modern Washbasin Cabinet */}
+      {/* Modern Bathroom Suite - Hansgrohe Inspired */}
       <group position={[0, -0.2, 0]}>
-        {/* Cabinet Base */}
-        <mesh position={[0, 0.2, 0]}>
-          <boxGeometry args={[1.2, 0.6, 0.5]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.3} roughness={0.4} />
+        {/* Premium Washbasin */}
+        <mesh position={[0, 0.6, 0]}>
+          <cylinderGeometry args={[0.3, 0.25, 0.12, 32]} />
+          <meshStandardMaterial color="#ffffff" metalness={0.2} roughness={0.1} />
         </mesh>
 
-        {/* Cabinet Top/Counter */}
-        <mesh position={[0, 0.52, 0]}>
-          <boxGeometry args={[1.25, 0.04, 0.52]} />
-          <meshStandardMaterial color="#ffffff" metalness={0.8} roughness={0.1} />
-        </mesh>
-
-        {/* Washbasin */}
-        <mesh position={[0, 0.65, 0]}>
-          <cylinderGeometry args={[0.25, 0.22, 0.15, 32]} />
-          <meshStandardMaterial color="#f7fafc" metalness={0.9} roughness={0.1} />
-        </mesh>
-
-        {/* Faucet */}
-        <group position={[0, 0.8, -0.15]}>
-          <mesh position={[0, 0.1, 0]}>
-            <cylinderGeometry args={[0.02, 0.02, 0.2]} />
-            <meshStandardMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
+        {/* Modern Faucet System */}
+        <group position={[0, 0.8, -0.1]}>
+          {/* Faucet Base */}
+          <mesh position={[0, 0.05, 0]}>
+            <cylinderGeometry args={[0.03, 0.03, 0.1]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
           </mesh>
-          <mesh position={[0, 0.2, 0.1]}>
-            <torusGeometry args={[0.08, 0.015, 8, 16]} />
-            <meshStandardMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
+          {/* Spout */}
+          <mesh position={[0, 0.15, 0.12]} rotation={[Math.PI/6, 0, 0]}>
+            <cylinderGeometry args={[0.015, 0.02, 0.25]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+          {/* Handle */}
+          <mesh position={[-0.1, 0.1, 0]}>
+            <boxGeometry args={[0.02, 0.08, 0.04]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
           </mesh>
         </group>
 
-        {/* Mirror */}
-        <mesh position={[0, 1.2, -0.28]}>
-          <boxGeometry args={[0.8, 0.6, 0.02]} />
-          <meshStandardMaterial color="#e2e8f0" metalness={0.9} roughness={0.1} />
-        </mesh>
+        {/* Shower Head System */}
+        <group position={[1.2, 1.5, -0.5]}>
+          {/* Shower Arm */}
+          <mesh rotation={[0, 0, Math.PI/4]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.4]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+          {/* Shower Head */}
+          <mesh position={[0.3, 0.3, 0]}>
+            <cylinderGeometry args={[0.12, 0.12, 0.03]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+        </group>
 
-        {/* Cabinet Handles */}
-        <mesh position={[-0.4, 0.3, 0.26]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.15]} />
-          <meshStandardMaterial color="#a0aec0" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh position={[0.4, 0.3, 0.26]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.15]} />
-          <meshStandardMaterial color="#a0aec0" metalness={0.8} roughness={0.2} />
-        </mesh>
-      </group>
+        {/* Pipe System */}
+        <group position={[-1, 0, -0.8]}>
+          {/* Main Pipe */}
+          <mesh>
+            <cylinderGeometry args={[0.05, 0.05, 2]} />
+            <meshStandardMaterial color="#87CEEB" metalness={0.8} roughness={0.2} />
+          </mesh>
+          {/* Pipe Fittings */}
+          <mesh position={[0, 0.7, 0]}>
+            <sphereGeometry args={[0.08]} />
+            <meshStandardMaterial color="#4682B4" metalness={0.9} roughness={0.1} />
+          </mesh>
+          <mesh position={[0, -0.7, 0]}>
+            <sphereGeometry args={[0.08]} />
+            <meshStandardMaterial color="#4682B4" metalness={0.9} roughness={0.1} />
+          </mesh>
+        </group>
 
-      {/* Floor tiles effect */}
-      <mesh position={[0, -0.8, 0]} rotation={[-Math.PI/2, 0, 0]}>
-        <planeGeometry args={[4, 4]} />
-        <meshStandardMaterial color="#e8e8e8" metalness={0.2} roughness={0.7} />
-      </mesh>
-
-      {/* Vent Pipe (Sci-fi inspired) */}
-      <group position={[1.5, 0.5, -1]}>
-        <mesh>
-          <cylinderGeometry args={[0.1, 0.1, 2]} />
-          <meshStandardMaterial color="#4a5568" metalness={0.7} roughness={0.3} />
-        </mesh>
-        {/* Pipe joints */}
-        <mesh position={[0, 0.5, 0]}>
-          <cylinderGeometry args={[0.15, 0.15, 0.1]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh position={[0, -0.5, 0]}>
-          <cylinderGeometry args={[0.15, 0.15, 0.1]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.8} roughness={0.2} />
-        </mesh>
-        {/* Vent cover */}
-        <mesh position={[0, 1.1, 0]}>
-          <cylinderGeometry args={[0.2, 0.15, 0.15]} />
-          <meshStandardMaterial color="#1a202c" metalness={0.9} roughness={0.1} />
+        {/* Bathtub */}
+        <mesh position={[0, -0.3, 1]} rotation={[0, 0, 0]}>
+          <boxGeometry args={[1.6, 0.4, 0.8]} />
+          <meshStandardMaterial color="#F0F8FF" metalness={0.1} roughness={0.3} />
         </mesh>
       </group>
     </group>
