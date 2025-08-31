@@ -1128,13 +1128,13 @@ export default function Landing() {
       {isCartOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
-          <div className="relative bg-slate-800 rounded-2xl border border-cyan-500/30 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-cyan-500/20">
+          <div className="relative bg-white rounded-2xl border border-gray-200 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">Shopping Cart</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Shopping Cart</h2>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
