@@ -435,7 +435,7 @@ export default function AdminDashboard() {
       };
 
       // Debug authentication
-      console.log('🔍 Fetching data from API endpoints...');
+      console.log('�� Fetching data from API endpoints...');
       console.log('🔐 User role:', user?.role, 'Username:', user?.username);
       console.log('🔑 Auth token present:', !!token);
       console.log('📋 Headers:', headers);
@@ -2806,6 +2806,7 @@ BBPlumbing Team
                   <TabsList>
                     <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
                     <TabsTrigger value="how-it-works">How It Works</TabsTrigger>
+                    <TabsTrigger value="mobile-conversion">Mobile App Conversion</TabsTrigger>
                   </TabsList>
                   <TabsContent value="dashboard" className="mt-6">
                     <div className="space-y-6">
@@ -2816,6 +2817,429 @@ BBPlumbing Team
                   <TabsContent value="how-it-works" className="mt-6">
                     <div className="space-y-6">
                       <AnalyticsHowItWorks />
+                    </div>
+                  </TabsContent>
+                  <TabsContent value="mobile-conversion" className="mt-6">
+                    <div className="space-y-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <Target className="h-5 w-5 mr-2 text-blue-600" />
+                            Mobile Android App Conversion Guide
+                          </CardTitle>
+                          <p className="text-gray-600">
+                            Complete instructions for converting the staff section of this web app into a native Android application
+                          </p>
+                        </CardHeader>
+                        <CardContent>
+                          <Tabs defaultValue="flutter" className="w-full">
+                            <TabsList className="grid w-full grid-cols-3">
+                              <TabsTrigger value="flutter">Flutter</TabsTrigger>
+                              <TabsTrigger value="react-native">React Native</TabsTrigger>
+                              <TabsTrigger value="xamarin">Xamarin</TabsTrigger>
+                            </TabsList>
+
+                            {/* Flutter Instructions */}
+                            <TabsContent value="flutter" className="mt-6">
+                              <div className="space-y-6">
+                                <div className="bg-blue-50 p-4 rounded-lg">
+                                  <h3 className="font-semibold text-blue-900 mb-2">🌺 Flutter Development Path</h3>
+                                  <p className="text-blue-700 text-sm">
+                                    Flutter provides excellent performance and native UI for Android apps with a single codebase.
+                                  </p>
+                                </div>
+
+                                <div className="space-y-4">
+                                  <h4 className="font-semibold text-lg">1. Project Setup</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Prerequisites:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li>Install Flutter SDK (latest stable version)</li>
+                                      <li>Install Android Studio with Android SDK</li>
+                                      <li>Set up Android device or emulator</li>
+                                      <li>Configure VS Code or Android Studio for Flutter development</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">2. Core App Structure</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Key Screens to Implement:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li><strong>Login Screen:</strong> Authentication with username/password</li>
+                                      <li><strong>Dashboard:</strong> Staff member's assigned jobs overview</li>
+                                      <li><strong>Job List:</strong> List of assigned jobs with status filtering</li>
+                                      <li><strong>Job Details:</strong> Individual job information and actions</li>
+                                      <li><strong>Form Signing:</strong> Digital signature capture and form completion</li>
+                                      <li><strong>Photo Upload:</strong> Camera integration for job photos</li>
+                                      <li><strong>Settings:</strong> Profile management and app preferences</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">3. Required Dependencies</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                                    <div className="mb-2 font-sans font-medium">Add to pubspec.yaml:</div>
+                                    <div className="space-y-1 text-gray-700">
+                                      <div>http: ^1.1.0  # API communication</div>
+                                      <div>shared_preferences: ^2.2.2  # Local storage</div>
+                                      <div>signature: ^5.3.0  # Digital signatures</div>
+                                      <div>image_picker: ^1.0.4  # Camera & gallery</div>
+                                      <div>connectivity_plus: ^5.0.1  # Network monitoring</div>
+                                      <div>sqflite: ^2.3.0  # Local database for offline</div>
+                                      <div>permission_handler: ^11.0.1  # Permissions</div>
+                                      <div>dio: ^5.3.2  # Advanced HTTP client</div>
+                                      <div>flutter_secure_storage: ^9.0.0  # Secure token storage</div>
+                                    </div>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">4. Authentication Implementation</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Login Flow:</h5>
+                                    <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                                      <li>Create login form with username/password fields</li>
+                                      <li>Send POST request to <code>/api/auth/login</code></li>
+                                      <li>Store JWT token securely using flutter_secure_storage</li>
+                                      <li>Include token in Authorization header for all API calls</li>
+                                      <li>Handle token expiration and automatic logout</li>
+                                      <li>Implement biometric authentication for convenience</li>
+                                    </ol>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">5. API Integration</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Key API Endpoints:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li><code>GET /api/jobs</code> - Fetch staff member's assigned jobs</li>
+                                      <li><code>PUT /api/jobs/:id</code> - Update job status and progress</li>
+                                      <li><code>GET /api/forms</code> - Fetch available forms</li>
+                                      <li><code>POST /api/forms/:id/submissions</code> - Submit completed forms</li>
+                                      <li><code>POST /api/upload</code> - Upload photos and documents</li>
+                                      <li><code>POST /api/staff/checkin</code> - Staff check-in/check-out</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">6. Offline Data Handling</h4>
+                                  <div className="bg-amber-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-amber-800">Critical Offline Features:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-amber-700">
+                                      <li><strong>Local Database:</strong> Use SQLite to store jobs, forms, and submissions when offline</li>
+                                      <li><strong>Queue System:</strong> Queue form submissions and photo uploads for later sync</li>
+                                      <li><strong>Sync Management:</strong> Auto-sync when connection is restored</li>
+                                      <li><strong>Conflict Resolution:</strong> Handle conflicts when data changes during offline period</li>
+                                      <li><strong>Progress Indicators:</strong> Show sync status and pending uploads</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">7. Form Signing Implementation</h4>
+                                  <div className="bg-green-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-green-800">Digital Signature Features:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-green-700">
+                                      <li>Implement signature canvas using the signature package</li>
+                                      <li>Capture signatures as PNG images</li>
+                                      <li>Store signatures locally until upload is possible</li>
+                                      <li>Associate signatures with specific form fields</li>
+                                      <li>Support multiple signatures per form if required</li>
+                                      <li>Include timestamp and GPS coordinates with signatures</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">8. Photo & File Management</h4>
+                                  <div className="bg-purple-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-purple-800">Media Handling:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-purple-700">
+                                      <li>Camera integration for job site photos</li>
+                                      <li>Image compression to optimize storage and upload</li>
+                                      <li>Local photo gallery with job association</li>
+                                      <li>Batch upload when connection is available</li>
+                                      <li>Progress tracking for large file uploads</li>
+                                      <li>Support for PDF and document scanning</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">9. Development Timeline</h4>
+                                  <div className="bg-blue-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-blue-800">Estimated Development Phases:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-blue-700">
+                                      <li><strong>Week 1-2:</strong> Project setup, authentication, basic navigation</li>
+                                      <li><strong>Week 3-4:</strong> API integration, job list and details screens</li>
+                                      <li><strong>Week 5-6:</strong> Form implementation and signature capture</li>
+                                      <li><strong>Week 7-8:</strong> Photo upload and offline data handling</li>
+                                      <li><strong>Week 9-10:</strong> Testing, optimization, and bug fixes</li>
+                                      <li><strong>Week 11-12:</strong> Deployment preparation and Play Store submission</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
+
+                            {/* React Native Instructions */}
+                            <TabsContent value="react-native" className="mt-6">
+                              <div className="space-y-6">
+                                <div className="bg-cyan-50 p-4 rounded-lg">
+                                  <h3 className="font-semibold text-cyan-900 mb-2">⚛️ React Native Development Path</h3>
+                                  <p className="text-cyan-700 text-sm">
+                                    Leverage existing React knowledge to build native Android apps with shared web codebase components.
+                                  </p>
+                                </div>
+
+                                <div className="space-y-4">
+                                  <h4 className="font-semibold text-lg">1. Environment Setup</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Prerequisites:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li>Node.js 18+ installed</li>
+                                      <li>React Native CLI or Expo CLI</li>
+                                      <li>Android Studio with Android SDK</li>
+                                      <li>Java Development Kit (JDK) 17+</li>
+                                      <li>Android device or emulator configured</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">2. Project Structure</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                                    <div className="mb-2 font-sans font-medium">Recommended folder structure:</div>
+                                    <div className="space-y-1 text-gray-700">
+                                      <div>src/</div>
+                                      <div>  components/  # Reusable UI components</div>
+                                      <div>  screens/     # App screens (Login, Jobs, etc.)</div>
+                                      <div>  navigation/  # React Navigation setup</div>
+                                      <div>  services/    # API calls and data management</div>
+                                      <div>  storage/     # AsyncStorage and offline data</div>
+                                      <div>  utils/       # Helper functions</div>
+                                      <div>  types/       # TypeScript type definitions</div>
+                                    </div>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">3. Essential Dependencies</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                                    <div className="mb-2 font-sans font-medium">npm install:</div>
+                                    <div className="space-y-1 text-gray-700">
+                                      <div>@react-navigation/native  # Navigation</div>
+                                      <div>@react-navigation/stack   # Stack navigator</div>
+                                      <div>@react-native-async-storage/async-storage  # Local storage</div>
+                                      <div>react-native-signature-canvas  # Digital signatures</div>
+                                      <div>react-native-image-picker  # Camera/gallery</div>
+                                      <div>@react-native-community/netinfo  # Network status</div>
+                                      <div>react-native-sqlite-storage  # Offline database</div>
+                                      <div>react-native-keychain  # Secure storage</div>
+                                      <div>axios  # HTTP client</div>
+                                    </div>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">4. Code Reusability</h4>
+                                  <div className="bg-green-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-green-800">Shared Components Strategy:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-green-700">
+                                      <li><strong>Business Logic:</strong> Extract API calls and data management into separate modules</li>
+                                      <li><strong>Form Logic:</strong> Reuse form validation and submission logic from web app</li>
+                                      <li><strong>Type Definitions:</strong> Share TypeScript interfaces between web and mobile</li>
+                                      <li><strong>Utilities:</strong> Date formatting, calculations, and helper functions</li>
+                                      <li><strong>Constants:</strong> API endpoints, configuration values</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">5. Navigation Implementation</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">App Navigation Structure:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li><strong>Auth Stack:</strong> Login, Password Reset screens</li>
+                                      <li><strong>Main Tab Navigator:</strong> Jobs, Calendar, Profile tabs</li>
+                                      <li><strong>Jobs Stack:</strong> Job List → Job Details → Form screens</li>
+                                      <li><strong>Modal Screens:</strong> Camera, Signature capture</li>
+                                      <li><strong>Deep Linking:</strong> Support for job-specific links</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">6. Data Synchronization</h4>
+                                  <div className="bg-amber-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-amber-800">Offline-First Architecture:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-amber-700">
+                                      <li><strong>Local Database:</strong> SQLite for caching jobs, forms, and user data</li>
+                                      <li><strong>Queue System:</strong> Background job queue for pending uploads</li>
+                                      <li><strong>Sync Service:</strong> Automatic sync when network is available</li>
+                                      <li><strong>Conflict Resolution:</strong> Handle server-client data conflicts</li>
+                                      <li><strong>Background Tasks:</strong> Continue sync when app is in background</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">7. Platform-Specific Features</h4>
+                                  <div className="bg-blue-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-blue-800">Android Integration:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-blue-700">
+                                      <li><strong>Push Notifications:</strong> Job assignments and updates</li>
+                                      <li><strong>Background Sync:</strong> Periodic data synchronization</li>
+                                      <li><strong>Biometric Auth:</strong> Fingerprint/face unlock for quick access</li>
+                                      <li><strong>File Sharing:</strong> Share completed forms via Android intents</li>
+                                      <li><strong>Geolocation:</strong> GPS coordinates for job check-ins</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
+
+                            {/* Xamarin Instructions */}
+                            <TabsContent value="xamarin" className="mt-6">
+                              <div className="space-y-6">
+                                <div className="bg-purple-50 p-4 rounded-lg">
+                                  <h3 className="font-semibold text-purple-900 mb-2">🔷 Xamarin Development Path</h3>
+                                  <p className="text-purple-700 text-sm">
+                                    Build native Android apps using C# and .NET, ideal for teams with Microsoft technology stack experience.
+                                  </p>
+                                </div>
+
+                                <div className="space-y-4">
+                                  <h4 className="font-semibold text-lg">1. Development Environment</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2">Required Tools:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                      <li>Visual Studio 2022 with Xamarin workload</li>
+                                      <li>.NET 6+ SDK</li>
+                                      <li>Android SDK and NDK</li>
+                                      <li>Java Development Kit (JDK) 11+</li>
+                                      <li>Android emulator or physical device</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">2. Architecture Choice</h4>
+                                  <div className="bg-blue-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-blue-800">Xamarin.Forms vs Xamarin.Android:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-blue-700">
+                                      <li><strong>Xamarin.Forms:</strong> Cross-platform UI, faster development, shared codebase</li>
+                                      <li><strong>Xamarin.Android:</strong> Native Android UI, better performance, platform-specific features</li>
+                                      <li><strong>Recommendation:</strong> Use Xamarin.Forms for rapid development, Xamarin.Android for performance-critical features</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">3. Project Structure</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                                    <div className="mb-2 font-sans font-medium">Solution structure:</div>
+                                    <div className="space-y-1 text-gray-700">
+                                      <div>StaffApp.Core/        # Shared business logic</div>
+                                      <div>StaffApp.Android/     # Android-specific implementation</div>
+                                      <div>StaffApp.Shared/      # Shared models and services</div>
+                                      <div>├── Models/           # Data models</div>
+                                      <div>├── Services/         # API and data services</div>
+                                      <div>├── ViewModels/       # MVVM view models</div>
+                                      <div>└── Helpers/          # Utility classes</div>
+                                    </div>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">4. Essential NuGet Packages</h4>
+                                  <div className="bg-gray-50 p-4 rounded-lg font-mono text-sm">
+                                    <div className="mb-2 font-sans font-medium">Key packages to install:</div>
+                                    <div className="space-y-1 text-gray-700">
+                                      <div>Newtonsoft.Json              # JSON serialization</div>
+                                      <div>Microsoft.Extensions.Http   # HTTP client factory</div>
+                                      <div>SQLite-net-pcl             # Local database</div>
+                                      <div>Xamarin.Essentials          # Cross-platform APIs</div>
+                                      <div>Plugin.Connectivity         # Network status</div>
+                                      <div>SignaturePad.Forms         # Digital signatures</div>
+                                      <div>Xam.Plugin.Media           # Camera and photo picker</div>
+                                      <div>Plugin.SecureStorage       # Secure credential storage</div>
+                                    </div>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">5. Authentication & Security</h4>
+                                  <div className="bg-green-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-green-800">Security Implementation:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-green-700">
+                                      <li><strong>JWT Tokens:</strong> Store securely using Plugin.SecureStorage</li>
+                                      <li><strong>HTTP Interceptors:</strong> Automatic token injection and refresh</li>
+                                      <li><strong>Certificate Pinning:</strong> Secure API communication</li>
+                                      <li><strong>Biometric Auth:</strong> Fingerprint and face recognition</li>
+                                      <li><strong>App Lock:</strong> Auto-lock after inactivity</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">6. Data Management Strategy</h4>
+                                  <div className="bg-amber-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-amber-800">Offline-First Data Handling:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-amber-700">
+                                      <li><strong>SQLite Database:</strong> Local storage for jobs, forms, and user data</li>
+                                      <li><strong>Repository Pattern:</strong> Abstract data access with caching</li>
+                                      <li><strong>Background Services:</strong> Automatic data synchronization</li>
+                                      <li><strong>Entity Framework:</strong> Optional ORM for complex data operations</li>
+                                      <li><strong>Conflict Resolution:</strong> Handle sync conflicts with server data</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">7. UI Implementation</h4>
+                                  <div className="bg-purple-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-purple-800">User Interface Approach:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-purple-700">
+                                      <li><strong>MVVM Pattern:</strong> Clean separation of UI and business logic</li>
+                                      <li><strong>Data Binding:</strong> Reactive UI updates</li>
+                                      <li><strong>Custom Renderers:</strong> Platform-specific UI customization</li>
+                                      <li><strong>Themes:</strong> Consistent styling across the app</li>
+                                      <li><strong>Accessibility:</strong> Support for screen readers and accessibility features</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">8. Testing Strategy</h4>
+                                  <div className="bg-blue-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-blue-800">Quality Assurance:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-blue-700">
+                                      <li><strong>Unit Tests:</strong> Business logic and service layer testing</li>
+                                      <li><strong>UI Tests:</strong> Xamarin.UITest for automated UI testing</li>
+                                      <li><strong>Integration Tests:</strong> API integration and data flow testing</li>
+                                      <li><strong>Performance Testing:</strong> Memory usage and response time monitoring</li>
+                                      <li><strong>Device Testing:</strong> Test on various Android devices and versions</li>
+                                    </ul>
+                                  </div>
+
+                                  <h4 className="font-semibold text-lg">9. Deployment Considerations</h4>
+                                  <div className="bg-orange-50 p-4 rounded-lg">
+                                    <h5 className="font-medium mb-2 text-orange-800">Production Deployment:</h5>
+                                    <ul className="list-disc list-inside space-y-1 text-sm text-orange-700">
+                                      <li><strong>Code Signing:</strong> Generate and configure Android keystore</li>
+                                      <li><strong>Play Store:</strong> Prepare app listing and compliance requirements</li>
+                                      <li><strong>App Bundle:</strong> Use Android App Bundle for optimized distribution</li>
+                                      <li><strong>CI/CD Pipeline:</strong> Automated building and deployment</li>
+                                      <li><strong>Crash Reporting:</strong> Integrate crash analytics and monitoring</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </TabsContent>
+
+                            {/* General Implementation Notes */}
+                            <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border">
+                              <h3 className="font-semibold text-lg mb-4 text-gray-900">🌺 General Implementation Notes</h3>
+
+                              <div className="grid md:grid-cols-2 gap-6">
+                                <div>
+                                  <h4 className="font-medium mb-2 text-blue-800">Server Considerations:</h4>
+                                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                    <li>Ensure CORS is configured for mobile app domain</li>
+                                    <li>Implement rate limiting for API endpoints</li>
+                                    <li>Add mobile-specific API endpoints if needed</li>
+                                    <li>Configure push notification service (FCM)</li>
+                                    <li>Optimize API responses for mobile bandwidth</li>
+                                  </ul>
+                                </div>
+
+                                <div>
+                                  <h4 className="font-medium mb-2 text-green-800">Security Best Practices:</h4>
+                                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+                                    <li>Never store sensitive data in plain text</li>
+                                    <li>Use HTTPS for all API communications</li>
+                                    <li>Implement certificate pinning</li>
+                                    <li>Add app integrity checks</li>
+                                    <li>Enable code obfuscation for production builds</li>
+                                  </ul>
+                                </div>
+                              </div>
+
+                              <div className="mt-4 p-4 bg-white rounded-lg border-l-4 border-blue-500">
+                                <h4 className="font-medium mb-2 text-blue-800">🎯 Success Metrics:</h4>
+                                <p className="text-sm text-gray-700">
+                                  <strong>Target Performance:</strong> App startup &lt; 3 seconds, Form submission &lt; 5 seconds,
+                                  Offline operation for 7+ days, Battery usage &lt; 2% per hour of active use.
+                                </p>
+                              </div>
+                            </div>
+                          </Tabs>
+                        </CardContent>
+                      </Card>
                     </div>
                   </TabsContent>
                 </Tabs>

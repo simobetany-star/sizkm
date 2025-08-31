@@ -134,17 +134,17 @@ const PLUMBING_PRODUCTS: Product[] = [
     id: "1",
     name: "Professional Pipe Wrench Set",
     price: 450.00,
-    image: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg",
+    image: "https://images.pexels.com/photos/16509869/pexels-photo-16509869.jpeg",
     category: "Tools",
     description: "Heavy-duty pipe wrench set for professional plumbers",
     inStock: true,
     featured: true
   },
   {
-    id: "2", 
+    id: "2",
     name: "Copper Pipe Fittings Kit",
     price: 285.50,
-    image: "https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg",
+    image: "https://images.pexels.com/photos/28178448/pexels-photo-28178448.jpeg",
     category: "Fittings",
     description: "Complete copper pipe fitting kit with joints and connections",
     inStock: true,
@@ -154,7 +154,7 @@ const PLUMBING_PRODUCTS: Product[] = [
     id: "3",
     name: "High-Pressure Water Pump",
     price: 1250.00,
-    image: "https://images.pexels.com/photos/159160/gear-machine-mechanical-engine-159160.jpeg",
+    image: "https://images.pexels.com/photos/12726229/pexels-photo-12726229.jpeg",
     category: "Pumps",
     description: "Industrial grade water pump for high-pressure applications",
     inStock: true,
@@ -164,7 +164,7 @@ const PLUMBING_PRODUCTS: Product[] = [
     id: "4",
     name: "PVC Pipe Bundle - 4 inch",
     price: 185.75,
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg",
+    image: "https://images.pexels.com/photos/17375718/pexels-photo-17375718.jpeg",
     category: "Pipes",
     description: "4-inch PVC pipes, 6-meter length bundle",
     inStock: true
@@ -173,7 +173,7 @@ const PLUMBING_PRODUCTS: Product[] = [
     id: "5",
     name: "Emergency Leak Repair Kit",
     price: 95.00,
-    image: "https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg",
+    image: "https://images.pexels.com/photos/18274115/pexels-photo-18274115.jpeg",
     category: "Repair",
     description: "Emergency leak repair kit with sealants and patches",
     inStock: true,
@@ -233,99 +233,92 @@ const LEARNING_CONTENT = [
   }
 ];
 
-// Modern Washbasin Cabinet 3D Model Component
-function ModernWashbasinCabinet() {
+// Fixed Position 3D Model Component that responds to scroll
+function ScrollResponsive3DModel({ section }: { section: number }) {
   const meshRef = useRef<THREE.Group>(null);
-  const { viewport, mouse } = useThree();
+  const { viewport } = useThree();
 
   useFrame(() => {
     if (meshRef.current) {
-      // Follow mouse position smoothly
-      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, (mouse.x * viewport.width) / 6, 0.1);
-      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, (mouse.y * viewport.height) / 6, 0.1);
+      // Position based on current section with smooth transitions
+      const targetX = (section % 3 - 1) * 2; // Move between -2, 0, 2
+      const targetY = Math.sin(section * 0.5) * 1; // Vertical movement
+      const targetZ = (section % 2) * 1; // Depth variation
 
-      // Add subtle rotation based on mouse movement
-      meshRef.current.rotation.y = mouse.x * 0.3;
-      meshRef.current.rotation.x = mouse.y * 0.2;
+      meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.05);
+      meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.05);
+      meshRef.current.position.z = THREE.MathUtils.lerp(meshRef.current.position.z, targetZ, 0.05);
+
+      // Rotate based on section
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(meshRef.current.rotation.y, section * 0.3, 0.05);
     }
   });
 
   return (
     <group ref={meshRef} position={[0, 0, 0]}>
-      {/* Modern Washbasin Cabinet */}
+      {/* Modern Bathroom Suite - Hansgrohe Inspired */}
       <group position={[0, -0.2, 0]}>
-        {/* Cabinet Base */}
-        <mesh position={[0, 0.2, 0]}>
-          <boxGeometry args={[1.2, 0.6, 0.5]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.3} roughness={0.4} />
+        {/* Premium Washbasin */}
+        <mesh position={[0, 0.6, 0]}>
+          <cylinderGeometry args={[0.3, 0.25, 0.12, 32]} />
+          <meshStandardMaterial color="#ffffff" metalness={0.2} roughness={0.1} />
         </mesh>
 
-        {/* Cabinet Top/Counter */}
-        <mesh position={[0, 0.52, 0]}>
-          <boxGeometry args={[1.25, 0.04, 0.52]} />
-          <meshStandardMaterial color="#ffffff" metalness={0.8} roughness={0.1} />
-        </mesh>
-
-        {/* Washbasin */}
-        <mesh position={[0, 0.65, 0]}>
-          <cylinderGeometry args={[0.25, 0.22, 0.15, 32]} />
-          <meshStandardMaterial color="#f7fafc" metalness={0.9} roughness={0.1} />
-        </mesh>
-
-        {/* Faucet */}
-        <group position={[0, 0.8, -0.15]}>
-          <mesh position={[0, 0.1, 0]}>
-            <cylinderGeometry args={[0.02, 0.02, 0.2]} />
-            <meshStandardMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
+        {/* Modern Faucet System */}
+        <group position={[0, 0.8, -0.1]}>
+          {/* Faucet Base */}
+          <mesh position={[0, 0.05, 0]}>
+            <cylinderGeometry args={[0.03, 0.03, 0.1]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
           </mesh>
-          <mesh position={[0, 0.2, 0.1]}>
-            <torusGeometry args={[0.08, 0.015, 8, 16]} />
-            <meshStandardMaterial color="#c0c0c0" metalness={0.9} roughness={0.1} />
+          {/* Spout */}
+          <mesh position={[0, 0.15, 0.12]} rotation={[Math.PI/6, 0, 0]}>
+            <cylinderGeometry args={[0.015, 0.02, 0.25]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+          {/* Handle */}
+          <mesh position={[-0.1, 0.1, 0]}>
+            <boxGeometry args={[0.02, 0.08, 0.04]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
           </mesh>
         </group>
 
-        {/* Mirror */}
-        <mesh position={[0, 1.2, -0.28]}>
-          <boxGeometry args={[0.8, 0.6, 0.02]} />
-          <meshStandardMaterial color="#e2e8f0" metalness={0.9} roughness={0.1} />
-        </mesh>
+        {/* Shower Head System */}
+        <group position={[1.2, 1.5, -0.5]}>
+          {/* Shower Arm */}
+          <mesh rotation={[0, 0, Math.PI/4]}>
+            <cylinderGeometry args={[0.02, 0.02, 0.4]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+          {/* Shower Head */}
+          <mesh position={[0.3, 0.3, 0]}>
+            <cylinderGeometry args={[0.12, 0.12, 0.03]} />
+            <meshStandardMaterial color="#4A90E2" metalness={0.9} roughness={0.05} />
+          </mesh>
+        </group>
 
-        {/* Cabinet Handles */}
-        <mesh position={[-0.4, 0.3, 0.26]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.15]} />
-          <meshStandardMaterial color="#a0aec0" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh position={[0.4, 0.3, 0.26]}>
-          <cylinderGeometry args={[0.01, 0.01, 0.15]} />
-          <meshStandardMaterial color="#a0aec0" metalness={0.8} roughness={0.2} />
-        </mesh>
-      </group>
+        {/* Pipe System */}
+        <group position={[-1, 0, -0.8]}>
+          {/* Main Pipe */}
+          <mesh>
+            <cylinderGeometry args={[0.05, 0.05, 2]} />
+            <meshStandardMaterial color="#87CEEB" metalness={0.8} roughness={0.2} />
+          </mesh>
+          {/* Pipe Fittings */}
+          <mesh position={[0, 0.7, 0]}>
+            <sphereGeometry args={[0.08]} />
+            <meshStandardMaterial color="#4682B4" metalness={0.9} roughness={0.1} />
+          </mesh>
+          <mesh position={[0, -0.7, 0]}>
+            <sphereGeometry args={[0.08]} />
+            <meshStandardMaterial color="#4682B4" metalness={0.9} roughness={0.1} />
+          </mesh>
+        </group>
 
-      {/* Floor tiles effect */}
-      <mesh position={[0, -0.8, 0]} rotation={[-Math.PI/2, 0, 0]}>
-        <planeGeometry args={[4, 4]} />
-        <meshStandardMaterial color="#e8e8e8" metalness={0.2} roughness={0.7} />
-      </mesh>
-
-      {/* Vent Pipe (Sci-fi inspired) */}
-      <group position={[1.5, 0.5, -1]}>
-        <mesh>
-          <cylinderGeometry args={[0.1, 0.1, 2]} />
-          <meshStandardMaterial color="#4a5568" metalness={0.7} roughness={0.3} />
-        </mesh>
-        {/* Pipe joints */}
-        <mesh position={[0, 0.5, 0]}>
-          <cylinderGeometry args={[0.15, 0.15, 0.1]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.8} roughness={0.2} />
-        </mesh>
-        <mesh position={[0, -0.5, 0]}>
-          <cylinderGeometry args={[0.15, 0.15, 0.1]} />
-          <meshStandardMaterial color="#2d3748" metalness={0.8} roughness={0.2} />
-        </mesh>
-        {/* Vent cover */}
-        <mesh position={[0, 1.1, 0]}>
-          <cylinderGeometry args={[0.2, 0.15, 0.15]} />
-          <meshStandardMaterial color="#1a202c" metalness={0.9} roughness={0.1} />
+        {/* Bathtub */}
+        <mesh position={[0, -0.3, 1]} rotation={[0, 0, 0]}>
+          <boxGeometry args={[1.6, 0.4, 0.8]} />
+          <meshStandardMaterial color="#F0F8FF" metalness={0.1} roughness={0.3} />
         </mesh>
       </group>
     </group>
@@ -443,6 +436,8 @@ export default function Landing() {
   const navigate = useNavigate();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [currentSection, setCurrentSection] = useState(0);
+  const [showProductDetail, setShowProductDetail] = useState<Product | null>(null);
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
     email: '',
@@ -579,36 +574,65 @@ export default function Landing() {
     }
   };
 
+  // Add scroll listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const newSection = Math.floor(scrollPosition / (windowHeight * 0.8));
+      setCurrentSection(Math.min(newSection, 4)); // Max 5 sections
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleViewDetails = (product: Product) => {
+    setShowProductDetail(product);
+  };
+
   return (
-    <div className="min-h-screen bg-slate-900 text-white overflow-hidden">
-      <GridBackground />
+    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
+      {/* Fixed 3D Canvas */}
+      <div className="fixed top-0 right-0 w-1/2 h-screen z-10 pointer-events-none">
+        <Canvas camera={{ position: [0, 2, 6], fov: 50 }}>
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[10, 10, 5]} intensity={1} color="#4A90E2" />
+          <pointLight position={[-10, -10, -5]} intensity={0.3} color="#87CEEB" />
+
+          <Suspense fallback={null}>
+            <Environment preset="city" />
+            <ScrollResponsive3DModel section={currentSection} />
+          </Suspense>
+        </Canvas>
+      </div>
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-cyan-500/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-slate-900 font-bold text-lg">BB</span>
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">BB</span>
               </div>
               <div>
-                <div className="text-white font-bold text-xl">BlockBusters and Partners</div>
-                <div className="text-cyan-400 text-sm font-medium">VRT FLOW.Outsourcing</div>
+                <div className="text-gray-900 font-bold text-xl">BlockBusters and Partners</div>
+                <div className="text-blue-600 text-sm font-medium">VRT FLOW.Outsourcing</div>
               </div>
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => smoothScrollTo('home')} className="text-slate-300 hover:text-cyan-400 transition-colors">Home</button>
-              <button onClick={() => smoothScrollTo('products')} className="text-slate-300 hover:text-cyan-400 transition-colors">Products</button>
-              <button onClick={() => smoothScrollTo('about')} className="text-slate-300 hover:text-cyan-400 transition-colors">About</button>
-              <button onClick={() => smoothScrollTo('learning')} className="text-slate-300 hover:text-cyan-400 transition-colors">Learning</button>
-              <button onClick={() => smoothScrollTo('contact')} className="text-slate-300 hover:text-cyan-400 transition-colors">Contact</button>
+              <button onClick={() => smoothScrollTo('home')} className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Home</button>
+              <button onClick={() => smoothScrollTo('products')} className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Products</button>
+              <button onClick={() => smoothScrollTo('about')} className="text-gray-600 hover:text-blue-600 transition-colors font-medium">About</button>
+              <button onClick={() => smoothScrollTo('learning')} className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Learning</button>
+              <button onClick={() => smoothScrollTo('contact')} className="text-gray-600 hover:text-blue-600 transition-colors font-medium">Contact</button>
             </div>
             
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg transition-colors font-medium flex items-center space-x-2"
+                className="relative bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors font-medium flex items-center space-x-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l1.5-6M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z" />
@@ -632,77 +656,40 @@ export default function Landing() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center">
-        {/* 3D Canvas Background */}
-        <div className="absolute inset-0 z-10">
-          <Canvas camera={{ position: [0, 2, 6], fov: 50 }}>
-            <ambientLight intensity={0.4} />
-            <directionalLight position={[10, 10, 5]} intensity={1} color="#00d4ff" />
-            <pointLight position={[-10, -10, -5]} intensity={0.5} color="#0099cc" />
-            
-            <Suspense fallback={null}>
-              <Environment preset="night" />
-              <ModernWashbasinCabinet />
-
-              {/* Floating plumbing tools */}
-              <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.4}>
-                <PlumbingWrench position={[-4, 2, -3]} />
-              </Float>
-
-              <Float speed={2} rotationIntensity={0.4} floatIntensity={0.6}>
-                <PlumbingPlunger position={[4, -1, -2]} />
-              </Float>
-
-              <Float speed={1.8} rotationIntensity={0.2} floatIntensity={0.5}>
-                <PlumbingWrench position={[-2, -2, 1]} />
-              </Float>
-
-              <Float speed={1.2} rotationIntensity={0.5} floatIntensity={0.3}>
-                <PlumbingPlunger position={[3, 3, -1]} />
-              </Float>
-            </Suspense>
-            
-            <OrbitControls 
-              enablePan={false} 
-              enableZoom={false} 
-              enableRotate={false}
-            />
-          </Canvas>
-        </div>
-
-        {/* Content Overlay */}
-        <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
+      <section id="home" className="relative h-screen flex items-center">
+        {/* Content */}
+        <div className="relative z-20 w-1/2 px-6 ml-12">
           <div className="mb-6">
-            <span className="inline-block px-6 py-3 bg-cyan-500/20 backdrop-blur border border-cyan-400/30 text-cyan-300 rounded-full text-sm font-medium mb-6">
-              You're Shopping South Africa Plumbing Suppliers 24/7 JHB Delivery. Tcs.
+            <span className="inline-block px-6 py-3 bg-blue-50 border border-blue-200 text-blue-600 rounded-full text-sm font-medium mb-6">
+              South Africa's Premier Plumbing Suppliers - 24/7 JHB Delivery
             </span>
           </div>
-          
-          <h1 className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
+
+          <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+            <span className="bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
               Your plumbing,
             </span>
             <br />
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
               built better
             </span>
           </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            We transform your plumbing vision into tangible solutions with professional-grade supplies 
-            that keep your projects flowing smoothly.
+
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed">
+            Transform your plumbing vision into reality with professional-grade supplies
+            and innovative 3D visualization tools.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <button 
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
               onClick={() => smoothScrollTo('products')}
-              className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg"
             >
-              Shop Now
+              Explore Products
             </button>
-            <button 
+            <button
               onClick={() => smoothScrollTo('about')}
-              className="border-2 border-cyan-400/50 hover:border-cyan-400 text-cyan-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:bg-cyan-400/10"
+              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all"
             >
               Learn More
             </button>
@@ -710,12 +697,12 @@ export default function Landing() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-          <button 
+        <div className="absolute bottom-8 left-12 animate-bounce z-20">
+          <button
             onClick={() => smoothScrollTo('featured-categories')}
-            className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center hover:border-cyan-400 transition-colors"
+            className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center hover:border-blue-600 transition-colors"
           >
-            <div className="w-1 h-3 bg-slate-400 rounded-full mt-2"></div>
+            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2"></div>
           </button>
         </div>
       </section>
@@ -801,13 +788,13 @@ export default function Landing() {
                     </span>
                   </div>
                   <button
-                    onClick={() => handleProductClick(product.id)}
-                    className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
-                  >
-                    <span className="bg-white/90 text-slate-900 px-4 py-2 rounded-lg font-medium">
-                      View Details
-                    </span>
-                  </button>
+                  onClick={() => handleViewDetails(product)}
+                  className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100"
+                >
+                  <span className="bg-white/90 text-gray-900 px-4 py-2 rounded-lg font-medium">
+                    View Details
+                  </span>
+                </button>
                 </div>
                 
                 <div className="p-6">
@@ -1049,17 +1036,105 @@ export default function Landing() {
         </div>
       </footer>
 
+      {/* Product Detail Modal */}
+      {showProductDetail && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowProductDetail(null)} />
+          <div className="relative bg-white rounded-2xl border border-gray-200 w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="p-6 border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-900">{showProductDetail.name}</h2>
+                <button
+                  onClick={() => setShowProductDetail(null)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <img
+                    src={showProductDetail.image}
+                    alt={showProductDetail.name}
+                    className="w-full h-64 object-cover rounded-lg mb-4"
+                  />
+                  <div className="space-y-4">
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h3 className="font-semibold text-blue-900 mb-2">3D Product Configurator</h3>
+                      <p className="text-blue-700 text-sm mb-3">Customize this product in real-time using our advanced 3D visualization tool.</p>
+                      <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                        Launch 3D Configurator
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="mb-6">
+                    <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-4">
+                      {showProductDetail.category}
+                    </span>
+                    <p className="text-gray-600 mb-6 leading-relaxed">{showProductDetail.description}</p>
+
+                    <div className="mb-6">
+                      <div className="text-3xl font-bold text-blue-600 mb-2">
+                        R{showProductDetail.price.toFixed(2)}
+                      </div>
+                      {showProductDetail.inStock ? (
+                        <span className="text-green-600 font-medium">✓ In Stock</span>
+                      ) : (
+                        <span className="text-red-600 font-medium">✗ Out of Stock</span>
+                      )}
+                    </div>
+
+                    <div className="space-y-3">
+                      <button
+                        onClick={() => {
+                          addToCart(showProductDetail);
+                          setShowProductDetail(null);
+                        }}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                      >
+                        Add to Cart
+                      </button>
+                      <button className="w-full border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold transition-colors">
+                        Save to Wishlist
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-200 pt-6">
+                    <h4 className="font-semibold text-gray-900 mb-3">Product Features</h4>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>• Professional-grade quality</li>
+                      <li>• South African compliant</li>
+                      <li>• 2-year manufacturer warranty</li>
+                      <li>• Fast delivery available</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Shopping Cart Modal */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
-          <div className="relative bg-slate-800 rounded-2xl border border-cyan-500/30 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-cyan-500/20">
+          <div className="relative bg-white rounded-2xl border border-gray-200 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div className="p-6 border-b border-gray-200">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">Shopping Cart</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Shopping Cart</h2>
                 <button
                   onClick={() => setIsCartOpen(false)}
-                  className="text-slate-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
